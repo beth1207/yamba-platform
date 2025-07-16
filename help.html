@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Help - Yamba</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+     <div class="logo">
+    <a href="home.html">Yamba</a>
+    <img src="logo.png" alt="Logo" />
+  </div>
+
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+  <nav id="navMenu">
+    <a href="home.html">Home</a>
+    <a href="account.html">Account</a>
+    <a href="help.html">Help</a>
+    <a href="#" id="logoutBtn">Logout</a>
+  </nav>
+  </header>
+
+  <main>
+    <h1>Contact Support</h1>
+    <form id="helpForm">
+      <input type="text" id="helpName" placeholder="Your Name" required />
+      <input type="email" id="helpEmail" placeholder="Your Email" required />
+      <textarea id="helpMessage" placeholder="Your Message" required rows="5"></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </main>
+
+  <footer>
+    <div>
+      <img src="logo.png" alt="Yamba Logo" style="height:24px; vertical-align:middle;" />
+      <span style="margin-left:8px;">Yamba Platform</span>
+    </div>
+    <div>
+      <a href="#">Facebook</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">WhatsApp</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

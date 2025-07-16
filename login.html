@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yamba Login</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  
+
+  <main>
+    <h1>Login to Yamba</h1>
+    <form id="loginForm">
+      <input type="tel" id="loginPhone" placeholder="Phone Number" required pattern="[0-9]{9,15}" />
+      <input type="password" id="loginPassword" placeholder="Password" required minlength="6" />
+      <button type="submit">Log In</button>
+    </form>
+    <p>Don't have an account? <a href="signup.html">Sign up here</a>.</p>
+  </main>
+
+  <footer>
+    <div>
+      <img src="logo.png" alt="Yamba Logo" style="height:24px; vertical-align:middle;" />
+      <span style="margin-left:8px;">Yamba Platform</span>
+    </div>
+    <div>
+      <a href="#">Facebook</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">WhatsApp</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
