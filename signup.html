@@ -9,11 +9,8 @@
 </head>
 <body>
   <main class="signup-container">
-    <h2>Create Your Yamba Account</h2>
     <form id="signupForm" class="form-single-column">
-      <label for="name">Full Name</label>
-      <input type="text" id="name" required />
-
+      <h1>Sign Up</h1>
       <label for="phone">Phone Number</label>
       <input type="tel" id="phone" required />
 
@@ -26,11 +23,15 @@
       <label for="confirmPassword">Confirm Password</label>
       <input type="password" id="confirmPassword" required />
 
-      <label class="terms-label">
+      <label class="checkbox-label">
         <input type="checkbox" id="terms" required /> I accept the Terms and Conditions
       </label>
 
       <button type="submit">Sign Up</button>
+      <p style="text-align:center; margin-top:18px;">
+        Already have an account?
+        <a href="login.html">Log in here</a>
+      </p>
     </form>
   </main>
 

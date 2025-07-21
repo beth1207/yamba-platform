@@ -10,10 +10,15 @@ body {
   flex-direction: column;
 }
 
+body, html {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
 header, footer {
   background: #004080;
   color: white;
-  padding: 10px 20px;
+  padding: 12px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -29,7 +34,29 @@ header a, footer a {
 .logo {
   height: 40px;   /* Adjust as needed */
   width: auto;    /* Keeps aspect ratio */
-  display: block; /* Optional: removes inline spacing */
+  display: flex; /* Optional: removes inline spacing */
+  align-items: center;
+}
+
+.welcome-section {
+  background: #e6f0fa;
+  padding: 32px 20px;
+  border-radius: 12px;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.welcome-section h1 {
+  margin: 0 0 10px 0;
+  color: #004080;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.welcome-section p {
+  margin: 0;
+  color: #333;
+  font-size: 1.15rem;
 }
 
 main {
@@ -55,18 +82,30 @@ input, select, textarea {
   border-radius: 4px;
 }
 
-button {
-  background: #004080;
-  color: white;
-  border: none;
-  padding: 12px;
-  font-size: 1rem;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: background 0.3s ease;
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 24px;
 }
 
-button:hover {
+
+.buttons button {
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  padding: 16px 0;
+  font-size: 1.1rem;
+  border-radius: 6px;
+  background: #004080;
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.buttons button:hover {
   background: #002f5d;
 }
 
@@ -111,8 +150,10 @@ header nav {
     box-shadow: none;
   }
   header, footer {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
   }
   nav {
     margin-top: 10px;
@@ -120,7 +161,7 @@ header nav {
    .hamburger {
     display: block;
     font-size: 1.5rem; /* smaller on mobile too */
-    margin-left: auto;
+    margin-left: 12px;
     align-self: center;
   }
   header nav {
@@ -144,6 +185,18 @@ header nav {
     text-decoration: none;
     font-weight: bold;
     display: block;
+  }
+  .buttons {
+    gap: 22px;
+    margin-top: 28px;
+  }
+  .buttons button {
+    font-size: 1rem;
+    padding: 14px 0;
+    max-width: 100%;
+  }
+  .logo {
+    flex: 1;
   }
 }
 #tasksList {
@@ -185,4 +238,45 @@ header nav {
   #tasksList {
     grid-template-columns: 1fr;
   }
+}
+.login-container,
+.signup-container {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-single-column {
+  background: #fff;
+  padding: 32px 28px;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0,64,128,0.08);
+  width: 100%;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-single-column h1 {
+  text-align: center;
+  color: #004080;
+  margin-bottom: 10px;
+}
+
+.form-single-column button {
+  background: #004080;
+  color: #fff;
+  border: none;
+  padding: 12px 0;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.form-single-column button:hover {
+  background: #002f5d;
 }
