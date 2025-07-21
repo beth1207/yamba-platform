@@ -1,36 +1,31 @@
+<!-- login.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Yamba Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - Yamba</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  
+  <main class="login-container">
+    <h2>Login to Yamba</h2>
+    <form id="loginForm" class="form-two-column">
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="loginPhone" required />
+      </div>
 
-  <main>
-    <h1>Login to Yamba</h1>
-    <form id="loginForm">
-      <input type="tel" id="loginPhone" placeholder="Phone Number" required pattern="[0-9]{9,15}" />
-      <input type="password" id="loginPassword" placeholder="Password" required minlength="6" />
-      <button type="submit">Log In</button>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="loginPassword" required />
+      </div>
+
+      <div class="form-actions">
+        <button type="submit">Login</button>
+      </div>
     </form>
-    <p>Don't have an account? <a href="signup.html">Sign up here</a>.</p>
   </main>
-
-  <footer>
-    <div>
-      <img src="logo.png" alt="Yamba Logo" style="height:24px; vertical-align:middle;" />
-      <span style="margin-left:8px;">Yamba Platform</span>
-    </div>
-    <div>
-      <a href="#">Facebook</a>
-      <a href="#">LinkedIn</a>
-      <a href="#">WhatsApp</a>
-    </div>
-  </footer>
-
   <script src="script.js"></script>
 </body>
 </html>

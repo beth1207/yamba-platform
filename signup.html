@@ -1,42 +1,38 @@
+<!-- signup.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Yamba Signup</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up - Yamba</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  
+  <main class="signup-container">
+    <h2>Create Your Yamba Account</h2>
+    <form id="signupForm" class="form-single-column">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" required />
 
-  <main>
-    <h1>Create Your Account</h1>
-    <form id="signupForm">
-      <input type="text" id="fullName" placeholder="Full Name" required />
-      <input type="tel" id="phoneNumber" placeholder="Phone Number" required pattern="[0-9]{9,15}" />
-      <input type="password" id="password" placeholder="Password" required minlength="6" />
-      <input type="password" id="confirmPassword" placeholder="Confirm Password" required minlength="6" />
-      <input type="text" id="skills" placeholder="Skills (comma separated)" required />
-      <label class="checkbox-label">
-        <input type="checkbox" id="terms" required />
-        I accept the <a href="#">Terms & Conditions</a>
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" required />
+
+      <label for="skills">Skills</label>
+      <input type="text" id="skills" required />
+
+      <label for="password">Password</label>
+      <input type="password" id="password" required />
+
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" id="confirmPassword" required />
+
+      <label class="terms-label">
+        <input type="checkbox" id="terms" required /> I accept the Terms and Conditions
       </label>
+
       <button type="submit">Sign Up</button>
     </form>
-    <p>Already have an account? <a href="login.html">Log in here</a>.</p>
   </main>
-
-  <footer>
-    <div>
-      <img src="logo.png" alt="Yamba Logo" style="height:24px; vertical-align:middle;" />
-      <span style="margin-left:8px;">Yamba Platform</span>
-    </div>
-    <div>
-      <a href="#">Facebook</a>
-      <a href="#">LinkedIn</a>
-      <a href="#">WhatsApp</a>
-    </div>
-  </footer>
 
   <script src="script.js"></script>
 </body>

@@ -232,8 +232,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // === NAV TOGGLE ===
-  window.toggleMenu = function () {
-    document.getElementById('navMenu').classList.toggle('show');
-  };
+
+});
+
+// Toggle mobile navigation menu
+function toggleMenu() {
+  const mobileNav = document.getElementById('mobileNav');
+  const hamburger = document.querySelector('.hamburger');
+  mobileNav.classList.toggle('open');
+  // Optional: Toggle hamburger icon
+  if (mobileNav.classList.contains('open')) {
+    hamburger.textContent = '✖';
+  } else {
+    hamburger.textContent = '☰';
+  }
+}
+
+window.addEventListener('resize', () => {
+  const mobileNav = document.getElementById('mobileNav');
+  const hamburger = document.querySelector('.hamburger');
+  if (window.innerWidth > 600) {
+    mobileNav.classList.remove('open');
+    if (hamburger) hamburger.textContent = '☰';
+  }
 });

@@ -1,47 +1,73 @@
+<!-- account.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Account - Yamba</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Account - Yamba</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-     <div class="logo">
-    <a href="home.html">Yamba</a>
-    <img src="logo.png" alt="Logo" />
-  </div>
-
-  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-
-  <nav id="navMenu">
-    <a href="home.html">Home</a>
+  <div class="logo">
+  <a href="home.html">
+    <img src="logo.png" class="logo" alt="Yamba Logo" />
+  </a>
+</div>
+  <nav>
     <a href="account.html">Account</a>
     <a href="help.html">Help</a>
     <a href="#" id="logoutBtn">Logout</a>
   </nav>
-  </header>
+  <button class="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">☰</button>
+</header>
 
-  <main>
-    <h1>Your Account</h1>
-    <form id="accountForm">
-      <input type="text" id="editFullName" placeholder="Full Name" required />
-      <input type="tel" id="editPhoneNumber" placeholder="Phone Number" required pattern="[0-9]{9,15}" disabled />
-      <input type="text" id="editSkills" placeholder="Skills (comma separated)" required />
-      <button type="submit">Save Changes</button>
+<!-- Mobile Nav -->
+<nav class="mobile-nav" id="mobileNav">
+  <a href="account.html">Account</a>
+  <a href="help.html">Help</a>
+  <a href="#" id="mobileLogoutBtn">Logout</a>
+</nav>
+
+  <main class="container">
+    <h1>My Account</h1>
+    <form id="accountForm" class="two-column-form">
+      <div class="column">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" required readonly />
+
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" name="fullName" required />
+
+        <label for="skills">Skills</label>
+        <input type="text" id="skills" name="skills" required />
+      </div>
+
+      <div class="column">
+        <label for="subscription">Subscription Status</label>
+        <input type="text" id="subscription" name="subscription" readonly />
+
+        <label for="newPassword">New Password</label>
+        <input type="password" id="newPassword" name="newPassword" />
+
+        <label for="confirmPassword">Confirm New Password</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" />
+      </div>
+
+      <div class="form-actions full-width">
+        <button type="submit">Update Account</button>
+      </div>
     </form>
   </main>
 
-  <footer>
-    <div>
-      <img src="logo.png" alt="Yamba Logo" style="height:24px; vertical-align:middle;" />
-      <span style="margin-left:8px;">Yamba Platform</span>
+  <footer class="footer">
+    <div class="footer-left">
+      <img src="logo.png" class="logo" alt="Yamba Logo" />
     </div>
-    <div>
+    <div class="footer-right">
       <a href="#">Facebook</a>
+      <a href="#">Twitter</a>
       <a href="#">LinkedIn</a>
-      <a href="#">WhatsApp</a>
     </div>
   </footer>
 

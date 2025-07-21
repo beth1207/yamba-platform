@@ -1,49 +1,59 @@
+<!-- home.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Yamba Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yamba - Home</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-     <div class="logo">
-    <a href="home.html">Yamba</a>
-    <img src="logo.png" alt="Logo" />
-  </div>
-
-  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-
-  <nav id="navMenu">
-    <a href="home.html">Home</a>
+  <div class="logo">
+  <a href="home.html">
+    <img src="logo.png" class="logo" alt="Yamba Logo" />
+  </a>
+</div>
+  <nav>
     <a href="account.html">Account</a>
     <a href="help.html">Help</a>
     <a href="#" id="logoutBtn">Logout</a>
   </nav>
-  </header>
+  <button class="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">☰</button>
+</header>
 
-  <main>
-    <h1>Welcome to Yamba</h1>
-    <p id="welcomeMsg"></p>
-
-    <div style="margin-top:30px;">
-      <button onclick="location.href='post.html'">Post a Job</button>
-      <button onclick="location.href='jobs.html'">View Jobs</button>
-      <button onclick="location.href='my-jobs.html'">Manage My Jobs</button>
-      <button onclick="location.href='subscription.html'">Subscription</button>
+<!-- Mobile Nav -->
+<nav class="mobile-nav" id="mobileNav">
+  <a href="account.html">Account</a>
+  <a href="help.html">Help</a>
+  <a href="#" id="mobileLogoutBtn">Logout</a>
+</nav>
+  <main class="container">
+    <div class="column-layout">
+      <div class="column">
+        <h1>Welcome to Yamba</h1>
+        <p>Empowering skills and bridging opportunities</p>
+      </div>
+      <div class="column">
+        <div class="buttons">
+          <button onclick="location.href='post.html'">Post a Job</button>
+          <button onclick="location.href='jobs.html'">View Available Jobs</button>
+           <button onclick="location.href='my-jobs.html'">My Posted Jobs</button>
+        <button onclick="location.href='my-tasks.html'">My Taken Tasks</button>
+          <button onclick="location.href='subscription.html'">Manage Subscription</button>
+        </div>
+      </div>
     </div>
   </main>
 
-  <footer>
-    <div>
-      <img src="logo.png" alt="Yamba Logo" style="height:24px; vertical-align:middle;" />
-      <span style="margin-left:8px;">Yamba Platform</span>
+  <footer class="footer">
+    <div class="footer-left">
+      <img src="logo.png" class="logo" alt="Yamba Logo" />
     </div>
-    <div>
+    <div class="footer-right">
       <a href="#">Facebook</a>
+      <a href="#">Twitter</a>
       <a href="#">LinkedIn</a>
-      <a href="#">WhatsApp</a>
     </div>
   </footer>
 

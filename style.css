@@ -11,7 +11,7 @@ body {
 }
 
 header, footer {
-  background: #1f2937;
+  background: #004080;
   color: white;
   padding: 10px 20px;
   display: flex;
@@ -22,7 +22,14 @@ header, footer {
 header a, footer a {
   color: white;
   text-decoration: none;
+  margin-left: 15px;
   font-weight: bold;
+}
+
+.logo {
+  height: 40px;   /* Adjust as needed */
+  width: auto;    /* Keeps aspect ratio */
+  display: block; /* Optional: removes inline spacing */
 }
 
 main {
@@ -70,13 +77,31 @@ button:hover {
   font-size: 0.9rem;
 }
 
-nav {
-  display: flex;
-  gap: 20px;
+nav a {
+  margin-left: 15px;
+  font-weight: 600;
 }
 
-nav a {
-  font-size: 14px;
+/* Hide hamburger by default, show nav */
+.hamburger {
+  display: none;
+  font-size: 1.5rem; /* smaller size */
+  margin-left: auto;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  line-height: 1;
+
+}
+
+/* Show nav by default */
+header nav {
+  display: flex;
+}
+
+.mobile-nav {
+    display: none;
 }
 
 @media (max-width: 600px) {
@@ -90,20 +115,74 @@ nav a {
     align-items: flex-start;
   }
   nav {
+    margin-top: 10px;
+  }
+   .hamburger {
+    display: block;
+    font-size: 1.5rem; /* smaller on mobile too */
+    margin-left: auto;
+    align-self: center;
+  }
+  header nav {
+    display: none;
+  }
+  /* Style mobile nav */
+  .mobile-nav {
     display: none;
     flex-direction: column;
-    background-color: #1f2937;
-    position: absolute;
-    top: 60px;
-    right: 20px;
-    padding: 10px;
-    z-index: 1000;
+    background: #004080;
+    color: white;
+    position: static;
+    padding: 20px 0;
   }
-  nav.show {
+  .mobile-nav.open {
     display: flex;
   }
-
-  .menu-toggle {
+  .mobile-nav a {
+    color: white;
+    padding: 12px 20px;
+    text-decoration: none;
+    font-weight: bold;
     display: block;
+  }
+}
+#tasksList {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin-top: 24px;
+}
+
+#tasksList li {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,64,128,0.07);
+  padding: 20px 16px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: box-shadow 0.2s;
+  min-height: 120px;
+}
+
+#tasksList li:hover {
+  box-shadow: 0 4px 16px rgba(0,64,128,0.15);
+}
+
+@media (max-width: 1100px) {
+  #tasksList {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 800px) {
+  #tasksList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 500px) {
+  #tasksList {
+    grid-template-columns: 1fr;
   }
 }
