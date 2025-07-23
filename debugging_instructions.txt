@@ -1,0 +1,30 @@
+Debugging Instructions for Phone Number Input Issue:
+
+1. Clear Browser Cache:
+   - Open your browser settings.
+   - Find the option to clear browsing data or cache.
+   - Clear cached images and files.
+   - Reload the signup page and test the input.
+
+2. Test in Different Browser or Incognito Mode:
+   - Open the signup page in a different browser (e.g., Firefox, Edge).
+   - Alternatively, open a new incognito/private window.
+   - Test the Phone Number input field for correct behavior.
+
+3. Use Browser Developer Tools:
+   - Press F12 or right-click and select "Inspect" to open developer tools.
+   - Go to the Console tab and check for any errors or warnings.
+   - Go to the Elements tab and locate the Phone Number input element.
+   - Verify the input is not disabled or overlapped by other elements.
+   - Check the Styles tab for any CSS that might affect the input.
+
+4. Monitor Input Events:
+   - In the Console tab, run the following to monitor input events:
+     document.getElementById('phone').addEventListener('input', e => console.log('Input event:', e.target.value));
+   - Type in the Phone Number field and observe the console logs.
+
+5. Additional Checks:
+   - Ensure no JavaScript errors are preventing input.
+   - Check if any other scripts or extensions interfere with the page.
+
+Follow these steps to identify the root cause of the input issue. If you need further assistance, please let me know.

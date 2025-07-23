@@ -4,10 +4,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // === SIGNUP LOGIC ===
   const signupForm = document.getElementById('signupForm');
   if (signupForm) {
-    signupForm.addEventListener('submit', e => {
+    signupForm.addEventListener('submit', function(e)  {
       e.preventDefault();
+       alert('Signup successful!');
+      window.location.href = 'login.html';
       const fullName = document.getElementById('fullName').value.trim();
-      const phoneNumber = document.getElementById('phoneNumber').value.trim();
+      const phoneNumber = document.getElementById('phone').value.trim();
       const password = document.getElementById('password').value;
       const confirmPassword = document.getElementById('confirmPassword').value;
       const skills = document.getElementById('skills').value.trim();
@@ -32,14 +34,14 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('users', JSON.stringify(users));
       localStorage.setItem('activeUser', JSON.stringify(newUser));
       alert("Signup successful! You will be logged in.");
-      window.location.href = 'home.html';
+      window.location.href = 'index.html';
     });
   }
 
   // === LOGIN PAGE ===
   const loginForm = document.getElementById('loginForm');
   if (loginForm) {
-    loginForm.addEventListener('submit', e => {
+    loginForm.addEventListener('submit', function(e) {
       e.preventDefault();
       const phone = document.getElementById('loginPhone').value.trim();
       const password = document.getElementById('loginPassword').value;
@@ -47,8 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const user = users.find(u => u.phoneNumber === phone && u.password === password);
       if (!user) return alert('Invalid phone number or password.');
       localStorage.setItem('activeUser', JSON.stringify(user));
-      alert('Login successful!');
-      window.location.href = 'home.html';
+      // alert('Login successful!');
+      window.location.href = 'index.html';
     });
   }
 
@@ -228,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('activeUser', JSON.stringify(activeUser));
       subscriptionStatus.textContent = `Active until ${new Date(newExpiry).toDateString()}`;
       alert('Subscription extended by 1 month.');
-      window.location.href = 'home.html';
+      window.location.href = 'index.html';
     });
   }
 

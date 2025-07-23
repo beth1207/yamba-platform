@@ -1,86 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profiles - Yamba</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profiles - Yamba</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="nav-logo">
-                <h2>🚀 Yamba</h2>
-            </a>
-            <div class="nav-menu">
-                <a href="jobs.html" class="nav-link">Jobs</a>
-                <a href="post.html" class="nav-link">Post Job</a>
-                <a href="my-jobs.html" class="nav-link">My Jobs</a>
-                <a href="profiles.html" class="nav-link active">Profiles</a>
-                <a href="account.html" class="nav-link">Account</a>
-                <a href="help.html" class="nav-link">Help</a>
-                <button id="logoutBtn" class="nav-link logout-btn">Logout</button>
-            </div>
-        </div>
+  <header>
+    <div class="logo">
+      <a href="index.html">Yamba</a>
+      <img src="logo.png" class="logo" alt="Yamba Logo" />
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="account.html">Account</a>
+      <a href="subscription.html">Subscription</a>
+      <a href="#" id="logoutBtn">Logout</a>
     </nav>
+    <button class="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">☰</button>
+  </header>
 
-    <main class="main-content">
-        <div class="page-header">
-            <h1>User Profiles</h1>
-            <p>Discover talented professionals on Yamba</p>
-        </div>
+  <main class="container">
+    <h1>Profiles</h1>
+    <p>Manage user profiles here.</p>
+  </main>
 
-        <div class="profiles-filters">
-            <div class="filter-group">
-                <input type="text" id="searchProfiles" placeholder="Search by name or skills...">
-                <select id="filterSkills">
-                    <option value="">All Skills</option>
-                    <option value="web development">Web Development</option>
-                    <option value="graphic design">Graphic Design</option>
-                    <option value="marketing">Marketing</option>
-                    <option value="writing">Writing</option>
-                    <option value="photography">Photography</option>
-                    <option value="video editing">Video Editing</option>
-                    <option value="mobile development">Mobile Development</option>
-                    <option value="data analysis">Data Analysis</option>
-                </select>
-                <select id="filterRating">
-                    <option value="">All Ratings</option>
-                    <option value="5">5 Stars</option>
-                    <option value="4">4+ Stars</option>
-                    <option value="3">3+ Stars</option>
-                </select>
-            </div>
-        </div>
+  <footer class="footer">
+    <div>
+      <img src="logo.png" class="logo" alt="Yamba Logo" />
+      <span>Yamba Platform</span>
+    </div>
+    <div>
+      <a href="#">Facebook</a>
+      <a href="#">Twitter</a>
+      <a href="#">LinkedIn</a>
+    </div>
+  </footer>
 
-        <div id="profilesContainer" class="profiles-container">
-            <!-- Profiles will be dynamically loaded here -->
-        </div>
-
-        <div id="noProfiles" class="no-profiles" style="display: none;">
-            <h3>No profiles found</h3>
-            <p>Try adjusting your search criteria</p>
-        </div>
-    </main>
-
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Contact Us</h4>
-                <p>Email: support@yamba.com</p>
-                <p>Phone: +256 700 123 456</p>
-            </div>
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <a href="help.html">Help & Support</a>
-                <a href="account.html">My Account</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 Yamba. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script src="scripts.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
