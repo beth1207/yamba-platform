@@ -9,29 +9,66 @@
 <body>
   <header>
     <div class="logo">
-      <a href="index.html">Yamba</a>
-      <img src="logo.png" class="logo" alt="Yamba Logo" />
+      <a href="index.html">
+        <img src="logo.png" class="logo" alt="Yamba Logo" />
+      </a>
     </div>
     <nav>
-      <a href="index.html">Home</a>
       <a href="account.html">Account</a>
-      <a href="subscription.html">Subscription</a>
       <a href="#" id="logoutBtn">Logout</a>
     </nav>
     <button class="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">☰</button>
   </header>
 
+  <!-- Mobile Nav -->
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="account.html">Account</a>
+    <a href="#" id="mobileLogoutBtn">Logout</a>
+  </nav>
+
   <main class="container">
-    <h1>Help</h1>
-    <p>Find answers to common questions and get support.</p>
+    <h1>Help Center</h1>
+    <p>Fill out the form below and we'll get back to you shortly.</p>
+    
+    <form id="helpForm" class="form-single-column">
+      <div class="form-group">
+        <label for="helpSubject">Subject</label>
+        <select id="helpSubject" required>
+          <option value="" disabled selected>Select an issue</option>
+          <option value="account">Account Issues</option>
+          <option value="jobs">Job Posting</option>
+          <option value="payment">Payment Problems</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="helpMessage">Describe your issue</label>
+        <textarea id="helpMessage" rows="5" required placeholder="Please describe your issue in detail..."></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label for="helpEmail">Email (optional)</label>
+        <input type="email" id="helpEmail" placeholder="Your email for follow-up">
+      </div>
+      
+      <button type="submit" class="submit-btn">Submit Request</button>
+      <div id="helpFormStatus" class="status-message"></div>
+    </form>
+    
+    <div class="help-contact">
+      <h2>Other Ways to Reach Us</h2>
+      <p><strong>Email:</strong>yambaplatform@gmail.com</p>
+      <p><strong>Phone:</strong> +256 752 566 630</p>
+      <p><strong>Hours:</strong> Monday-Friday, 8AM-5PM</p>
+    </div>
   </main>
 
   <footer class="footer">
-    <div>
+    <div class="footer-left">
       <img src="logo.png" class="logo" alt="Yamba Logo" />
-      <span>Yamba Platform</span>
     </div>
-    <div>
+    <div class="footer-right">
       <a href="#">Facebook</a>
       <a href="#">Twitter</a>
       <a href="#">LinkedIn</a>
