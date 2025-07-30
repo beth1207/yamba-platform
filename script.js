@@ -1,12 +1,25 @@
-// script.js - optimized and fixed version
+function toggleMenu() {
+  const mobileNav = document.getElementById('mobileNav');
+  const hamburger = document.querySelector('.hamburger');
+  
+  if (!mobileNav || !hamburger) {
+    console.error("Mobile menu elements not found!");
+    return;
+  }
 
-// Debug function
-function debugStorage() {
-  console.log("=== DEBUG ===");
-  console.log("Active User:", JSON.parse(localStorage.getItem('activeUser')));
+  // Toggle the menu
+  mobileNav.classList.toggle('open');
+  
+  // Update hamburger icon
+  hamburger.textContent = mobileNav.classList.contains('open') ? '✖' : '☰';
+  
+  // Update aria-expanded for accessibility
+  hamburger.setAttribute('aria-expanded', mobileNav.classList.contains('open'));
+}
+
   console.log("Job List:", JSON.parse(localStorage.getItem('jobList')));
   console.log("Users:", JSON.parse(localStorage.getItem('users')));
-}
+
 
 // Account Page Functions
 function initializeAccountPage() {

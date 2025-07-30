@@ -39,6 +39,11 @@ header a, footer a {
   align-items: center;
 }
 
+.logo img {
+  height: 40px; /* or your desired size */
+  width: auto;
+}
+
 /* Account Profile Styles */
 .account-profile {
   max-width: 800px;
@@ -341,6 +346,7 @@ nav a {
   cursor: pointer;
   padding: 8px;
   margin-left: auto; /* Push to right side */
+  line-height: 1;
 }
 
 /* Show nav by default */
@@ -474,19 +480,21 @@ header nav {
     margin-bottom: 10px;
   }
   .footer {
-    flex-direction: column;
-    text-align: center;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
     padding: 15px;
   }
   .footer-left, .footer-right {
-    width: 100%;
-    justify-content: center;
+    width: auto;
+    justify-content: flex-start;
     display: flex;
     align-items: center;
   }
 
   .footer-right {
-    margin-top: 10px;
+    margin-top: 0;
   }
 
   /* Job details specific */
@@ -897,10 +905,7 @@ header nav {
   display: block !important;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-}
+
 
 input, select, textarea, button {
   width: 100%;
