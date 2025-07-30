@@ -555,14 +555,14 @@ window.addEventListener('resize', () => {
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
-  debugStorage();
-  setupAccountNavigation();
+  // debugStorage();
+  // setupAccountNavigation();
   setupLoginForm();
   setupLogoutHandlers();
   setupWelcomeMessage();
   
   setupSignupForm();
-  setupPostJobForm();
+  // setupPostJobForm();
   initializeAccountPage();
   renderJobsList();
   initializeJobPage();

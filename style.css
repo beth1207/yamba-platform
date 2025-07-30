@@ -21,8 +21,12 @@ header, footer {
   padding: 12px 20px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-wrap: wrap;
+}
+
+header nav {
+  margin-left: auto;
 }
 
 header a, footer a {
@@ -203,7 +207,7 @@ header a, footer a {
 
   .form-single-column {
     position: relative;
-    border-right: 6px solid #004080;
+    /* border-right: 6px solid #004080; */
   }
 
   .form-single-column::after {
@@ -352,6 +356,16 @@ nav a {
 /* Show nav by default */
 header nav {
   display: flex;
+  background-color: rgba(255, 255, 0, 0.2); /* TEMPORARY: yellow background */
+  border: 1px solid orange; /* TEMPORARY: orange border */
+  padding: 5px;
+  z-index: 1100;
+}
+
+header nav a {
+  outline: 1px solid red; /* TEMPORARY: red outline on links */
+  padding: 5px 10px;
+  display: inline-block;
 }
 
 .mobile-nav {
@@ -400,21 +414,37 @@ header nav {
   }
   header{
     display: flex;
-    flex-direction: row;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     padding: 10px 15px;
+    background-color: rgba(255, 0, 0, 0.1); /* TEMPORARY: red background */
+    border: 1px solid red; /* TEMPORARY: red border */
   }
   nav {
-    margin-top: 10px;
+    display: none;
   }
-   .hamburger {
+   .logo {
+    flex: none;
+    height: 30px;
+    width: auto;
+    margin: 0;
+    background-color: rgba(0, 0, 255, 0.1); /* TEMPORARY: blue background */
+    border: 1px solid blue; /* TEMPORARY: blue border */
+  }
+  .logo-hamburger {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hamburger {
     display: block;
     font-size: 1.5rem; /* smaller on mobile too */
     margin: 0px;
     padding: 5px;
     order: 2; 
     z-index: 1001;
+    background-color: rgba(0, 255, 0, 0.1); /* TEMPORARY: green background */
+    border: 1px solid green; /* TEMPORARY: green border */
   }
   header nav {
     display: none;
@@ -451,50 +481,6 @@ header nav {
     font-size: 1rem;
     padding: 14px 0;
     max-width: 100%;
-  }
-  .logo {
-    flex: 1;
-    height: 30px;
-    width: auto;
-    margin: 0;
-  }
-   .welcome-section {
-    padding: 20px;
-    border-radius: 0;
-    width: 100%;
-  }
-  .form-single-column {
-    padding: 20px 15px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  .job-card {
-    padding: 15px;
-    margin-bottom: 15px;
-  }
-  .card-buttons {
-    flex-direction: column;
-  }
-  .card-buttons button {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-  .footer {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    text-align: left;
-    padding: 15px;
-  }
-  .footer-left, .footer-right {
-    width: auto;
-    justify-content: flex-start;
-    display: flex;
-    align-items: center;
-  }
-
-  .footer-right {
-    margin-top: 0;
   }
 
   /* Job details specific */
