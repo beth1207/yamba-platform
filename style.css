@@ -547,6 +547,8 @@ header nav a {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 15px;
+  box-sizing: border-box;
 }
 
 .form-single-column {
@@ -560,6 +562,17 @@ header nav a {
   display: flex;
   flex-direction: column;
   gap: 18px;
+}
+
+@media (max-width: 600px) {
+  .form-single-column {
+    padding: 20px 15px;
+    margin: 20px auto;
+    width: 100%;
+    max-width: none;
+    box-shadow: none;
+    border-radius: 0;
+  }
 }
 
 .form-single-column h1 {
