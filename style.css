@@ -12,6 +12,8 @@ body {
 
 body, html {
   min-height: 100vh;
+  height: auto;
+  overflow-y: auto;
   overflow-x: hidden;
 }
 
@@ -356,14 +358,11 @@ nav a {
 /* Show nav by default */
 header nav {
   display: flex;
-  background-color: rgba(255, 255, 0, 0.2); /* TEMPORARY: yellow background */
-  border: 1px solid orange; /* TEMPORARY: orange border */
   padding: 5px;
   z-index: 1100;
 }
 
 header nav a {
-  outline: 1px solid red; /* TEMPORARY: red outline on links */
   padding: 5px 10px;
   display: inline-block;
 }
@@ -401,50 +400,44 @@ header nav a {
     font-size: 14px;
   }
    .container {
-    padding: 15px;
+    padding: 10px;
     margin: 0;
     border-radius: 0;
     box-shadow: none;
   }
 
   main {
-    margin: 10px;
-    padding: 15px;
+    margin: 5px;
+    padding: 10px;
     box-shadow: none;
   }
   header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 15px;
-    background-color: rgba(255, 0, 0, 0.1); /* TEMPORARY: red background */
-    border: 1px solid red; /* TEMPORARY: red border */
+    padding: 5px 10px;
   }
   nav {
     display: none;
   }
    .logo {
     flex: none;
-    height: 30px;
+    height: 25px;
     width: auto;
     margin: 0;
-    background-color: rgba(0, 0, 255, 0.1); /* TEMPORARY: blue background */
-    border: 1px solid blue; /* TEMPORARY: blue border */
   }
   .logo-hamburger {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
   }
   .hamburger {
     display: block;
-    font-size: 1.5rem; /* smaller on mobile too */
+    font-size: 1.3rem;
     margin: 0px;
-    padding: 5px;
+    padding: 4px;
     order: 2; 
     z-index: 1001;
-    background-color: rgba(0, 255, 0, 0.1); /* TEMPORARY: green background */
-    border: 1px solid green; /* TEMPORARY: green border */
   }
   header nav {
     display: none;
@@ -456,8 +449,8 @@ header nav a {
     background: #004080;
     color: white;
     position: absolute;
-    padding: 10px 0;
-    top: 60px; /* Adjust based on header height */
+    padding: 8px 0;
+    top: 50px;
     left: 0;
     right: 0;
     z-index: 1000;
@@ -467,19 +460,19 @@ header nav a {
   }
   .mobile-nav a {
     color: white;
-    padding: 12px 20px;
+    padding: 10px 16px;
     text-decoration: none;
     font-weight: bold;
     border-top: 1px solid rgba(255,255,255,0.1);
     display: block;
   }
   .buttons {
-    gap: 22px;
-    margin-top: 28px;
+    gap: 18px;
+    margin-top: 20px;
   }
   .buttons button {
-    font-size: 1rem;
-    padding: 14px 0;
+    font-size: 0.9rem;
+    padding: 12px 0;
     max-width: 100%;
   }
 
