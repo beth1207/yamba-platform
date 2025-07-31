@@ -566,7 +566,6 @@ document.addEventListener('DOMContentLoaded', function() {
   setupLoginForm();
   setupLogoutHandlers();
   setupWelcomeMessage();
-  
   setupSignupForm();
   setupPostJobForm();
   initializeAccountPage();
