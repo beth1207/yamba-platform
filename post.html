@@ -33,28 +33,28 @@
   <main class="container">
     <h1>Post a New Job</h1>
     <form id="postJobForm" class="form-single-column">
-      <input type="text" id="jobTitle" placeholder="Job Title" required />
-      <textarea id="jobDescription" placeholder="Job Description" required rows="4"></textarea>
+  <input type="text" id="jobTitle" placeholder="Job Title" required />
+  <textarea id="jobDescription" placeholder="Job Description" required rows="4"></textarea>
 
-      <label for="jobType">Job Type:</label>
-      <select id="jobType" required>
-        <option value="" disabled selected>Select type</option>
-        <option value="open">Open (no limit on claimants)</option>
-        <option value="closed">Closed (limited claims)</option>
-      </select>
+  <label for="jobType">Job Type:</label>
+  <select id="jobType" required>
+    <option value="" disabled selected>Select type</option>
+    <option value="open">Open (no limit on claimants)</option>
+    <option value="closed">Closed (limited claims)</option>
+  </select>
 
-      <input type="number" id="numIndividuals" placeholder="Number of individuals required" min="1" required />
+  <input type="number" id="numIndividuals" placeholder="Number of individuals required" min="1" required />
 
-      <div id="budgetSection" style="display:none; margin-top:10px;">
-        <input type="number" id="budget" placeholder="Budget (UGX)" min="0" />
-        <label><input type="checkbox" id="negotiable" /> Negotiable</label>
-      </div>
+  <div id="budgetSection" style="display:none; margin-top:10px;">
+    <input type="number" id="jobBudget" placeholder="Budget (UGX)" min="0" />
+    <label><input type="checkbox" id="negotiable" /> Negotiable</label>
+  </div>
 
-      <label for="duration">Duration (days):</label>
-      <input type="number" id="duration" placeholder="Job duration in days" min="1" required />
+  <label for="jobDuration">Duration (days):</label>
+  <input type="number" id="jobDuration" placeholder="Job duration in days" min="1" required />
 
-      <button type="submit">Post Job</button>
-    </form>
+  <button type="submit">Submit</button>
+</form>
   </main>
 
   <footer class="footer">

@@ -283,14 +283,24 @@ function renderJobsList() {
   const activeUser = JSON.parse(localStorage.getItem('activeUser'));
   const now = Date.now();
 
-  const availableJobs = jobs.filter(job => {
-    if (!job || typeof job !== 'object') return false;
-    const isValidJob = job.status && job.expiresAt && job.posterPhone;
-    if (!isValidJob) return false;
-    return job.status === 'open' && 
-           job.expiresAt > now &&
-           (!activeUser || job.posterPhone !== activeUser.phoneNumber);
-  });
+ const availableJobs = jobs.filter(job => {
+  if (!job || typeof job !== 'object') return false;
+  const isValidJob = job.status && job.expiresAt && job.posterPhone;
+  if (!isValidJob) return false;
+  if (job.status !== 'open' || job.expiresAt <= now) return false;
+  if (activeUser && job.posterPhone === activeUser.phoneNumber) return false; // Don't show own jobs
+
+  // Skill matching
+  if (activeUser && Array.isArray(activeUser.skills) && activeUser.skills.length > 0) {
+    const jobSkills = (job.skills || []).map(s => s.trim().toLowerCase());
+    const userSkills = activeUser.skills.map(s => s.trim().toLowerCase());
+    // If job has skills, show only if user matches at least one
+    if (jobSkills.length > 0 && !jobSkills.some(skill => userSkills.includes(skill))) {
+      return false;
+    }
+  }
+  return true;
+});
 
   if (availableJobs.length === 0) {
     jobsContainer.innerHTML = `
@@ -389,7 +399,19 @@ function claimJob(jobId) {
 
   jobs[jobIndex].claimedBy.push(activeUser.phoneNumber);
   localStorage.setItem('jobList', JSON.stringify(jobs));
+
+  let users = JSON.parse(localStorage.getItem('users')) || [];
+  const userIndex = users.findIndex(u => u.phoneNumber === activeUser.phoneNumber);
+  if (userIndex !== -1) {
+    if (!Array.isArray(users[userIndex].takenJobs)) users[userIndex].takenJobs = [];
+    if (!users[userIndex].takenJobs.includes(jobId)) users[userIndex].takenJobs.push(jobId);
+    localStorage.setItem('users', JSON.stringify(users));
+    localStorage.setItem('activeUser', JSON.stringify(users[userIndex]));
+  }
+
   showPosterContact(jobs[jobIndex]);
+
+
 }
 
 function showPosterContact(job) {
@@ -444,42 +466,21 @@ function setupMyJobsPage() {
   if (!myJobsContainer) return;
 
   const activeUser = JSON.parse(localStorage.getItem('activeUser'));
-  if (!activeUser) return window.location.href = 'login.html';
+  if (!activeUser) return;
 
-  let jobs = JSON.parse(localStorage.getItem('jobList')) || [];
-  jobs = jobs.filter(job => job.posterPhone === activeUser.phoneNumber);
+  const jobs = JSON.parse(localStorage.getItem('jobList')) || [];
+  const myJobs = jobs.filter(job => job.posterPhone === activeUser.phoneNumber);
 
-  if (jobs.length === 0) {
-    myJobsContainer.innerHTML = '<p>You have not posted any jobs yet.</p>';
+  if (myJobs.length === 0) {
+    myJobsContainer.innerHTML = '<li>No jobs posted yet.</li>';
   } else {
-    jobs.forEach(job => {
-      const div = document.createElement('div');
-      div.className = 'job-card';
-      div.innerHTML = `
-        <h3>${job.title}</h3>
-        <p>${job.description}</p>
-        <p><strong>Duration:</strong> ${job.duration} day(s)</p>
-        ${job.jobType === 'closed' ? `<p><strong>Budget:</strong> UGX ${job.budget}</p>` : ''}
-        <p><strong>Status:</strong> ${job.status}</p>
-        <p><strong>Claimed By:</strong> ${job.claimedBy.join(', ') || 'None'}</p>
-        <button class="cancelBtn" data-id="${job.id}" ${job.status !== 'open' ? 'disabled' : ''}>Cancel</button>
-      `;
-      myJobsContainer.appendChild(div);
-    });
-
-    document.querySelectorAll('.cancelBtn').forEach(btn => {
-      btn.addEventListener('click', e => {
-        const id = e.target.getAttribute('data-id');
-        let jobs = JSON.parse(localStorage.getItem('jobList')) || [];
-        const jobIndex = jobs.findIndex(j => j.id === id);
-        if (jobIndex !== -1) {
-          jobs[jobIndex].status = 'cancelled';
-          localStorage.setItem('jobList', JSON.stringify(jobs));
-          alert('Job cancelled.');
-          window.location.reload();
-        }
-      });
-    });
+    myJobsContainer.innerHTML = myJobs.map(job => `
+      <li>
+        <strong>${job.title}</strong><br>
+        ${job.description}<br>
+        <span>Status: ${job.status}</span>
+      </li>
+    `).join('');
   }
 }
 
@@ -567,7 +568,7 @@ document.addEventListener('DOMContentLoaded', function() {
   setupWelcomeMessage();
   
   setupSignupForm();
-  // setupPostJobForm();
+  setupPostJobForm();
   initializeAccountPage();
   renderJobsList();
   initializeJobPage();
@@ -623,4 +624,86 @@ window.onload = function() {
   }
 };
 // ...existing code...
+function setupPostJobForm() {
+  const form = document.getElementById('postJobForm');
+  if (!form) return;
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent page refresh
+
+    // Collect form data
+    const title = form.querySelector('#jobTitle').value.trim();
+    const description = form.querySelector('#jobDescription').value.trim();
+    const duration = form.querySelector('#jobDuration').value;
+    const jobType = form.querySelector('#jobType').value;
+    const activeUser = JSON.parse(localStorage.getItem('activeUser'));
+    let budget = 0;
+    let negotiable = false;
+
+    if (jobType === 'closed') {
+      budget = form.querySelector('#jobBudget').value || 0;
+      negotiable = form.querySelector('#negotiable').checked;
+    }
+
+    if (!title || !description || !activeUser) {
+      alert('Please fill in all required fields and login.');
+      return;
+    }
+
+    // Create job object
+    const job = {
+      id: 'job-' + Date.now(),
+      title,
+      description,
+      duration: Number(duration),
+      budget: Number(budget),
+      jobType,
+      negotiable,
+      posterName: activeUser.fullName,
+      posterPhone: activeUser.phoneNumber,
+      status: 'open',
+      expiresAt: Date.now() + Number(duration) * 24 * 60 * 60 * 1000,
+      claimedBy: [],
+      completedBy: []
+    };
+
+    // Save to localStorage
+    const jobs = JSON.parse(localStorage.getItem('jobList')) || [];
+    jobs.push(job);
+    localStorage.setItem('jobList', JSON.stringify(jobs));
+
+    
+    // Redirect to user's posted jobs or available jobs
+    alert('Job posted successfully!');
+    window.location.href = 'jobs.html';
+  });
+
+  
+}
+
+// Example for "My Taken Tasks"
+function setupTakenJobsPage() {
+  const takenJobsContainer = document.getElementById('takenJobsContainer');
+  if (!takenJobsContainer) return;
+
+  const activeUser = JSON.parse(localStorage.getItem('activeUser'));
+  if (!activeUser || !Array.isArray(activeUser.takenJobs)) return;
+
+  const jobs = JSON.parse(localStorage.getItem('jobList')) || [];
+  const takenJobs = jobs.filter(job => activeUser.takenJobs.includes(job.id));
+
+  if (takenJobs.length === 0) {
+    takenJobsContainer.innerHTML = '<p>You have not claimed any jobs yet.</p>';
+  } else {
+    takenJobsContainer.innerHTML = takenJobs.map(job => `
+      <div class="job-card">
+        <h3>${job.title}</h3>
+        <p>${job.description}</p>
+        <p><strong>Status:</strong> ${job.status}</p>
+      </div>
+    `).join('');
+  }
+}
+
+
 
