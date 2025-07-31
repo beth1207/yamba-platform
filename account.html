@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Account - Yamba</title>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -14,6 +14,7 @@
       </a>
     </div>
     <nav>
+      <a href="account.html">Account</a>
       <a href="help.html">Help</a>
       <a href="#" id="logoutBtn">Logout</a>
     </nav>
@@ -24,58 +25,42 @@
 
   <!-- Mobile Nav -->
   <nav class="mobile-nav" id="mobileNav">
-    <a href="help.html">Help</a>
+     
+    <a href="help.html">help</a>
     <a href="#" id="mobileLogoutBtn">Logout</a>
   </nav>
 
   <main class="container">
-    <div class="account-profile">
+    <form id="accountForm" class="form-single-column">
       <h1>My Account</h1>
-      
-      <div class="profile-section">
-        <h2>Personal Information</h2>
-        <form id="accountForm">
-          <div class="profile-field">
-            <label>Full Name:</label>
-            <input type="text" id="fullName" class="editable-field" readonly>
-            <button type="button" class="edit-btn" data-field="fullName">Edit</button>
-          </div>
+      <label for="fullName">Full Name</label>
+      <input type="text" id="fullName" readonly />
 
-          <div class="profile-field">
-            <label>Phone Number:</label>
-            <span id="phone" class="readonly-field"></span>
-          </div>
+      <label for="phone">Phone Number</label>
+      <span id="phone"></span>
 
-          <div class="profile-field">
-            <label>My Skills:</label>
-            <div id="skillsDisplay" class="skills-container"></div>
-            <div id="skillsEdit" style="display:none">
-              <textarea id="skillsInput" rows="3" placeholder="Add skills separated by commas"></textarea>
-              <div class="skills-actions">
-                <button type="button" id="saveSkills">Save</button>
-                <button type="button" id="cancelSkills">Cancel</button>
-              </div>
-            </div>
-            <button type="button" id="editSkills" class="edit-btn">Edit Skills</button>
-          </div>
-
-          <div class="profile-field">
-            <label>Change Password:</label>
-            <div id="passwordChange" style="display:none">
-              <input type="password" id="newPassword" placeholder="New password">
-              <input type="password" id="confirmNewPassword" placeholder="Confirm new password">
-              <div class="password-actions">
-                <button type="button" id="savePassword">Update Password</button>
-                <button type="button" id="cancelPassword">Cancel</button>
-              </div>
-            </div>
-            <button type="button" id="editPassword" class="edit-btn">Change Password</button>
-          </div>
-
-          <div id="updateStatus" class="status-message"></div>
-        </form>
+      <label>Skills</label>
+      <div id="skillsDisplay" class="skills-container"></div>
+      <button type="button" id="editSkills" class="edit-btn">Edit Skills</button>
+      <div id="skillsEdit" style="display:none;">
+        <input type="text" id="skillsInput" placeholder="Comma separated skills" />
+        <button type="button" id="saveSkills" class="edit-btn">Save</button>
+        <button type="button" id="cancelSkills" class="edit-btn">Cancel</button>
       </div>
-    </div>
+
+      <button type="button" class="edit-btn" data-field="fullName">Edit Name</button>
+
+      <label>Password</label>
+      <button type="button" id="editPassword" class="edit-btn">Change Password</button>
+      <div id="passwordChange" style="display:none;">
+        <input type="password" id="newPassword" placeholder="New password" />
+        <input type="password" id="confirmNewPassword" placeholder="Confirm new password" />
+        <button type="button" id="savePassword" class="edit-btn">Save</button>
+        <button type="button" id="cancelPassword" class="edit-btn">Cancel</button>
+      </div>
+
+      <div id="updateStatus" class="status-message"></div>
+    </form>
   </main>
 
   <footer class="footer">
