@@ -1,4 +1,3 @@
-<!-- login.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,38 +7,17 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <a href="index.html">
-        <img src="logo.png" class="logo" alt="Yamba Logo" />
-      </a>
-    </div>
-    
-    <div class="logo-hamburger">
-      <button class="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">☰</button>
-    </div>
-  </header>
-
-  <!-- Mobile Nav -->
- 
-
   <main class="container">
     <form id="loginForm" class="form-single-column">
       <h1>Login</h1>
       <label for="loginPhone">Phone number</label>
       <input type="tel" id="loginPhone" required />
-
       <label for="loginPassword">Password</label>
       <input type="password" id="loginPassword" required />
-
-      <button type="submit">Log In</button>
-      <p style="text-align:center; margin-top:18px;">
-        Don't have an account?
-        <a href="signup.html">Sign up here</a>
-      </p>
+      <button type="submit">Login</button>
+      <p>Don't have an account? <a href="signup.html">Sign up</a></p>
     </form>
   </main>
-
   <script src="script.js"></script>
 </body>
 </html>
