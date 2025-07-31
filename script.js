@@ -377,6 +377,11 @@ function claimJob(jobId) {
 
   if (jobIndex === -1) return;
 
+  // Ensure claimedBy is always an array
+  if (!Array.isArray(jobs[jobIndex].claimedBy)) {
+    jobs[jobIndex].claimedBy = [];
+  }
+
   if (jobs[jobIndex].claimedBy.includes(activeUser.phoneNumber)) {
     alert('You have already claimed this task.');
     return;
@@ -604,3 +609,18 @@ function setupWelcomeMessage() {
     welcomeMsg.textContent = 'Welcome! Please login.';
   }
 }
+
+// ...existing code...
+window.onload = function() {
+  // Example logic: replace with your actual authentication check
+  const isLoggedIn = false; // Replace with real check
+  if (window.location.pathname.includes('task-details.html')) {
+    if (!isLoggedIn) {
+      window.location.href = 'signup.html';
+    } else {
+      window.location.href = 'login.html';
+    }
+  }
+};
+// ...existing code...
+

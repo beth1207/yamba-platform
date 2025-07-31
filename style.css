@@ -13,8 +13,7 @@ body {
 body, html {
   min-height: 100vh;
   height: auto;
-  overflow-y: auto;
-  overflow-x: hidden;
+  
 }
 
 header, footer {
@@ -235,6 +234,18 @@ header a, footer a {
     flex: 1 1 100%;
     font-size: 1rem;
     padding: 14px 20px;
+  }
+
+  .container {
+    padding: 16px 8px;
+    max-width: 100%;
+  }
+
+  main {
+    padding: 10px;
+    margin: 0;
+    box-shadow: none;
+    border-radius: 0;
   }
 }
 
@@ -885,7 +896,7 @@ header nav a {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 32px 24px;
   box-sizing: border-box; /* Add this */
 }
 
@@ -911,3 +922,42 @@ input, select, textarea, button {
     min-width: 250px;
   }
 }
+
+/* Add to style.css or create a new CSS file for these pages */
+/* ...existing code... */
+.job-info {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0,64,128,0.08);
+  padding: 32px 24px;
+  margin: 32px auto;
+  max-width: 500px;
+  text-align: center;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.action-buttons button,
+.action-buttons a {
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  background: #004080;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.action-buttons button:hover,
+.action-buttons a:hover {
+  background: #0073e6;
+}
+/* ...existing code... */
