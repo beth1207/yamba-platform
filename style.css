@@ -289,6 +289,96 @@ input, select, textarea {
   border-radius: 4px;
 }
 
+/* OTP Section Styling */
+#otpSection {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 8px;
+  background: #f9f9f9;
+}
+
+#otpSection label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+#otpSection input {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+#verifyOtpBtn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#verifyOtpBtn:hover {
+  background: #45a049;
+}
+
+/* Login & Signup Form Styling */
+.form-single-column {
+  max-width: 400px;
+  margin: 3rem auto;
+  padding: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.form-single-column h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.form-single-column label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #444;
+}
+
+.form-single-column input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.form-single-column button {
+  width: 100%;
+  padding: 0.75rem;
+  background: #4CAF50;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.form-single-column button:hover {
+  background: #45a049;
+}
+
+.form-single-column p {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+
 .buttons {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));

@@ -10,13 +10,26 @@
   <main class="container">
     <form id="signupForm" class="form-single-column">
       <h1>Sign Up</h1>
+
       <label for="signupName">Full Name</label>
       <input type="text" id="signupName" required />
+
       <label for="signupPhone">Phone number</label>
       <input type="tel" id="signupPhone" required />
+
       <label for="signupPassword">Password</label>
       <input type="password" id="signupPassword" required />
-      <button type="submit">Sign Up</button>
+
+      <!-- OTP Section (hidden initially) -->
+      <div id="otpSection" style="display:none; margin-top:1rem;">
+        <label for="otpCode">Enter OTP</label>
+        <input type="text" id="otpCode" maxlength="6" placeholder="6-digit code" />
+        <button type="button" id="verifyOtpBtn">Verify OTP</button>
+      </div>
+
+      <!-- Main Signup Button -->
+      <button type="submit" id="signupBtn">Sign Up</button>
+
       <p>Already have an account? <a href="login.html">Login</a></p>
     </form>
   </main>

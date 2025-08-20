@@ -1,3 +1,5 @@
+const backendUrl = "https://yamba-backend.onrender.com/api/auth";
+
 function toggleMenu() {
   const mobileNav = document.getElementById('mobileNav');
   const hamburger = document.querySelector('.hamburger');
@@ -225,54 +227,70 @@ function setupSignupForm() {
   const signupForm = document.getElementById('signupForm');
   if (!signupForm) return;
 
-  signupForm.addEventListener('submit', function(e) {
+  signupForm.addEventListener('submit', async function(e) {
     e.preventDefault();
-    const fullName = document.getElementById('fullName').value.trim();
-    const phoneNumber = document.getElementById('phone').value.trim();
-    const password = document.getElementById('password').value;
-    const confirmPassword = document.getElementById('confirmPassword').value;
-    const skills = document.getElementById('skills').value.trim();
-    const terms = document.getElementById('terms').checked;
+    const fullName = document.getElementById('signupName').value.trim();
+    const phone = document.getElementById('signupPhone').value.trim();
+    const password = document.getElementById('signupPassword').value;
 
-    if (password !== confirmPassword) return alert("Passwords don't match!");
-    if (!terms) return alert("You must accept the Terms & Conditions.");
+    try {
+      const res = await fetch(`${backendUrl}/signup`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone, password })
+      });
 
-    let users = JSON.parse(localStorage.getItem('users')) || [];
-    if (users.some(u => u.phoneNumber === phoneNumber)) return alert("Phone number already registered.");
+      const data = await res.json();
+      if (!res.ok) {
+        alert(data.message || "Signup failed");
+        return;
+      }
 
-    const newUser = {
-      fullName,
-      phoneNumber,
-      password,
-      skills: skills.split(',').map(s => s.trim().toLowerCase()),
-      subscriptionExpiry: null,
-      userType: null
-    };
-
-    users.push(newUser);
-    localStorage.setItem('users', JSON.stringify(users));
-    localStorage.setItem('activeUser', JSON.stringify(newUser));
-    alert("Signup successful! You will be logged in.");
-    window.location.href = 'index.html';
+      alert("Signup successful!");
+      // Save logged-in user info (optional if backend returns user)
+      localStorage.setItem("activeUser", JSON.stringify({ fullName, phone }));
+      window.location.href = "index.html";
+    } catch (err) {
+      console.error(err);
+      alert("Error connecting to server");
+    }
   });
 }
+
 
 // Login Functionality
 function setupLoginForm() {
   const loginForm = document.getElementById('loginForm');
   if (!loginForm) return;
 
-  loginForm.addEventListener('submit', function(e) {
+  loginForm.addEventListener('submit', async function(e) {
     e.preventDefault();
     const phone = document.getElementById('loginPhone').value.trim();
     const password = document.getElementById('loginPassword').value;
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    const user = users.find(u => u.phoneNumber === phone && u.password === password);
-    if (!user) return alert('Invalid phone number or password.');
-    localStorage.setItem('activeUser', JSON.stringify(user));
-    window.location.href = 'index.html';
+
+    try {
+      const res = await fetch(`${backendUrl}/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone, password })
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        alert(data.error || "Login failed");
+        return;
+      }
+
+      alert("Login successful!");
+      localStorage.setItem("activeUser", JSON.stringify(data.user));
+      window.location.href = "index.html";
+    } catch (err) {
+      console.error(err);
+      alert("Error connecting to server");
+    }
   });
 }
+
 
 // Jobs Listing Functionality
 function renderJobsList() {
