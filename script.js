@@ -222,40 +222,98 @@ function setupHelpForm() {
   });
 }
 
-// Signup Functionality
+// Signup Functionality with OTP
 function setupSignupForm() {
   const signupForm = document.getElementById('signupForm');
+  const otpSection = document.getElementById('otpSection');
+  const verifyOtpBtn = document.getElementById('verifyOtpBtn');
+
   if (!signupForm) return;
 
+  let cachedPhone = null;
+  let cachedPassword = null;
+
+  // Step 1: Send OTP
   signupForm.addEventListener('submit', async function(e) {
     e.preventDefault();
     const fullName = document.getElementById('signupName').value.trim();
     const phone = document.getElementById('signupPhone').value.trim();
     const password = document.getElementById('signupPassword').value;
 
+    if (!fullName || !phone || !password) {
+      alert("All fields required");
+      return;
+    }
+
     try {
-      const res = await fetch(`${backendUrl}/signup`, {
+      const res = await fetch(`${backendUrl}/send-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone, password })
+        body: JSON.stringify({ username: fullName, phone })
       });
-
       const data = await res.json();
       if (!res.ok) {
-        alert(data.message || "Signup failed");
+        alert(data.message || "Failed to send OTP");
         return;
       }
 
-      alert("Signup successful!");
-      // Save logged-in user info (optional if backend returns user)
-      localStorage.setItem("activeUser", JSON.stringify({ fullName, phone }));
-      window.location.href = "index.html";
+      alert("OTP sent! Please enter it below.");
+      otpSection.style.display = "block";   // show OTP input
+      cachedPhone = phone;
+      cachedPassword = password;
+
     } catch (err) {
       console.error(err);
       alert("Error connecting to server");
     }
   });
+
+  // Step 2: Verify OTP + Finish Signup
+  if (verifyOtpBtn) {
+    verifyOtpBtn.addEventListener('click', async function() {
+      const code = document.getElementById('otpCode').value.trim();
+      if (!code || !cachedPhone) {
+        alert("Enter OTP first");
+        return;
+      }
+
+      try {
+        const res = await fetch(`${backendUrl}/verify-otp`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ phone: cachedPhone, code })
+        });
+        const data = await res.json();
+        if (!data.success) {
+          alert(data.message || "OTP verification failed");
+          return;
+        }
+
+        // OTP verified → now signup
+        const signupRes = await fetch(`${backendUrl}/signup`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ phone: cachedPhone, password: cachedPassword })
+        });
+
+        const signupData = await signupRes.json();
+        if (!signupRes.ok) {
+          alert(signupData.message || "Signup failed");
+          return;
+        }
+
+        alert("Signup successful!");
+        localStorage.setItem("activeUser", JSON.stringify({ phone: cachedPhone }));
+        window.location.href = "index.html";
+
+      } catch (err) {
+        console.error(err);
+        alert("Error connecting to server");
+      }
+    });
+  }
 }
+
 
 
 // Login Functionality
