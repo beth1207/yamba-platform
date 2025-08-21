@@ -232,87 +232,71 @@ function setupSignupForm() {
 
   let cachedPhone = null;
   let cachedPassword = null;
+  let cachedName = null;
 
-  // Step 1: Send OTP
-  signupForm.addEventListener('submit', async function(e) {
+  // Step 1: send OTP
+  signupForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const fullName = document.getElementById('signupName').value.trim();
     const phone = document.getElementById('signupPhone').value.trim();
     const password = document.getElementById('signupPassword').value;
 
-    if (!fullName || !phone || !password) {
-      alert("All fields required");
-      return;
-    }
+    if (!fullName || !phone || !password) return alert('All fields required');
 
     try {
-      const res = await fetch(`${backendUrl}/send-otp`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const r = await fetch(`${backendUrl}/send-otp`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: fullName, phone })
       });
-      const data = await res.json();
-      if (!res.ok) {
-        alert(data.message || "Failed to send OTP");
-        return;
-      }
+      const j = await r.json();
+      if (!r.ok) return alert(j.message || 'Failed to send OTP');
 
-      alert("OTP sent! Please enter it below.");
-      otpSection.style.display = "block";   // show OTP input
       cachedPhone = phone;
       cachedPassword = password;
-
-    } catch (err) {
-      console.error(err);
-      alert("Error connecting to server");
+      cachedName = fullName;
+      otpSection.style.display = 'block';
+      alert('OTP sent. Check your phone.');
+    } catch (e2) {
+      console.error(e2); alert('Network error sending OTP');
     }
   });
 
-  // Step 2: Verify OTP + Finish Signup
+  // Step 2: verify OTP + finish signup
   if (verifyOtpBtn) {
-    verifyOtpBtn.addEventListener('click', async function() {
+    verifyOtpBtn.addEventListener('click', async () => {
       const code = document.getElementById('otpCode').value.trim();
-      if (!code || !cachedPhone) {
-        alert("Enter OTP first");
-        return;
-      }
+      if (!code || !cachedPhone) return alert('Enter OTP');
 
       try {
-        const res = await fetch(`${backendUrl}/verify-otp`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
+        const r1 = await fetch(`${backendUrl}/verify-otp`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ phone: cachedPhone, code })
         });
-        const data = await res.json();
-        if (!data.success) {
-          alert(data.message || "OTP verification failed");
-          return;
-        }
+        const j1 = await r1.json();
+        if (!j1.success) return alert(j1.message || 'OTP verification failed');
 
-        // OTP verified → now signup
-        const signupRes = await fetch(`${backendUrl}/signup`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
+        const r2 = await fetch(`${backendUrl}/signup`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ phone: cachedPhone, password: cachedPassword })
         });
+        const j2 = await r2.json();
+        if (!r2.ok) return alert(j2.message || 'Signup failed');
 
-        const signupData = await signupRes.json();
-        if (!signupRes.ok) {
-          alert(signupData.message || "Signup failed");
-          return;
-        }
-
-        alert("Signup successful!");
-        localStorage.setItem("activeUser", JSON.stringify({ phone: cachedPhone }));
-        window.location.href = "index.html";
-
-      } catch (err) {
-        console.error(err);
-        alert("Error connecting to server");
+        // Save token + user locally
+        localStorage.setItem('authToken', j2.token);
+        localStorage.setItem('activeUser', JSON.stringify(j2.user));
+        alert('Signup successful!');
+        window.location.href = 'index.html';
+      } catch (e3) {
+        console.error(e3); alert('Network error finishing signup');
       }
     });
   }
 }
+
 
 
 
@@ -321,33 +305,31 @@ function setupLoginForm() {
   const loginForm = document.getElementById('loginForm');
   if (!loginForm) return;
 
-  loginForm.addEventListener('submit', async function(e) {
+  loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const phone = document.getElementById('loginPhone').value.trim();
     const password = document.getElementById('loginPassword').value;
+    if (!phone || !password) return alert('Phone and password required');
 
     try {
-      const res = await fetch(`${backendUrl}/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const r = await fetch(`${backendUrl}/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ phone, password })
       });
+      const j = await r.json();
+      if (!r.ok) return alert(j.error || 'Login failed');
 
-      const data = await res.json();
-      if (!res.ok) {
-        alert(data.error || "Login failed");
-        return;
-      }
-
-      alert("Login successful!");
-      localStorage.setItem("activeUser", JSON.stringify(data.user));
-      window.location.href = "index.html";
-    } catch (err) {
-      console.error(err);
-      alert("Error connecting to server");
+      localStorage.setItem('authToken', j.token);
+      localStorage.setItem('activeUser', JSON.stringify(j.user));
+      alert('Login successful!');
+      window.location.href = 'index.html';
+    } catch (e2) {
+      console.error(e2); alert('Network error logging in');
     }
   });
 }
+
 
 
 // Jobs Listing Functionality
@@ -778,6 +760,27 @@ function setupTakenJobsPage() {
       </div>
     `).join('');
   }
+}
+
+function getAuthHeaders() {
+  const token = localStorage.getItem('authToken');
+  return token ? { Authorization: `Bearer ${token}` } : {};
+}
+
+// Example protected call
+async function fetchProfile() {
+  const r = await fetch('https://yamba-backend.onrender.com/api/protected/me', {
+    headers: { 'Content-Type': 'application/json', ...getAuthHeaders() }
+  });
+  if (r.status === 401) {
+    // token expired/invalid – force logout
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('activeUser');
+    window.location.href = 'login.html';
+    return;
+  }
+  const j = await r.json();
+  console.log(j);
 }
 
 
