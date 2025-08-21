@@ -1,4 +1,4 @@
-const backendUrl = "https://yamba-backend.onrender.com/api/auth";
+const backendUrl = "https://yamba-backend-2lb4.onrender.com/api/auth";
 
 function toggleMenu() {
   const mobileNav = document.getElementById('mobileNav');
